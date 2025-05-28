@@ -18,20 +18,28 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '16'
     
     - name: Install dependencies
-      run: npm install
+      run: |
+        echo "Installing dependencies..."
+        npm install
     
     - name: Run linting
-      run: npm run lint
+      run: |
+        echo "Running linting..."
+        npm run lint
       continue-on-error: true
     
     - name: Run tests
-      run: npm run test
+      run: |
+        echo "Running tests..."
+        node test.js
     
     - name: Build
-      run: npm run build
+      run: |
+        echo "Building project..."
+        npm run build
 
   deploy:
     needs: build
@@ -45,15 +53,20 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '16'
     
     - name: Install dependencies
-      run: npm install
+      run: |
+        echo "Installing dependencies for deployment..."
+        npm install
     
     - name: Build for production
-      run: npm run build
+      run: |
+        echo "Building for production..."
+        npm run build
     
     - name: Deploy to production
       run: |
         echo "Deployment would happen here"
         echo "Deployment successful!"
+        echo "CI/CD pipeline completed successfully at $(date)"
